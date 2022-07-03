@@ -31,7 +31,6 @@ datos = LOAD 'data.csv' USING PigStorage(',')
         color:chararray,
         id2:int         
         );
-
 fetch_1 = FILTER datos BY STARTSWITH(color,'b'); 
 fetch_2 = FOREACH fetch_1 GENERATE color; 
 

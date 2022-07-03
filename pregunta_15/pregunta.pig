@@ -20,3 +20,16 @@ $ pig -x local -f pregunta.pig
 
 */
 
+datos = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id:int,
+        nombre:chararray,
+        apellido:chararray,
+        fecha:chararray,
+        color:chararray,
+        id2:int         
+        );
+fetch_1 = FILTER datos BY STARTSWITH(color,'blue') AND STARTSWITH(nombre,'Z'); 
+fetch_2 = FOREACH fetch_1 GENERATE CONCAT(nombre,' ',color); 
+
+STORE fetch_2 INTO 'output/' USING PigStorage(',');
