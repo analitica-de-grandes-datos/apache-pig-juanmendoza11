@@ -21,3 +21,21 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+
+datos = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id:int,
+        nombre:chararray,
+        apellido:chararray,
+        fecha:chararray,
+        color:chararray,
+        id_2:int           
+  ); 
+
+fetch_1 = FOREACH datos GENERATE apellido, SIZE(apellido) as len; 
+
+fetch_2 = ORDER fetch_1 BY len desc, apellido asc; 
+
+fetch_3 = LIMIT fetch_2 5;
+
+STORE fetch_3 INTO 'output/' USING PigStorage(',');
