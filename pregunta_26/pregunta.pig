@@ -21,3 +21,16 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+datos = LOAD 'data.csv' USING PigStorage(',')
+    AS (
+        id:int,
+        nombre:chararray,
+        apellido:chararray,
+        f_nac:chararray,
+        color:chararray,
+        id2:int           
+        ); 
+
+filtro = FILTER datos BY SUBSTRING(nombre,0,1) >= 'M';
+fetch_1 = FOREACH filtro GENERATE nombre;
+STORE fetch_1 INTO 'output/' using PigStorage(',');
