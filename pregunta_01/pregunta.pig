@@ -15,6 +15,6 @@ $ pig -x local -f pregunta.pig
 
 datos = LOAD 'data.tsv' AS (letter:chararray, date:chararray, amount:int);
 agrupar = GROUP datos BY letter;
-conteo = FOREACH agrupar GENERATE group, COUNT(A);
+conteo = FOREACH agrupar GENERATE group, COUNT(datos);
 
 STORE conteo INTO 'output/' using PigStorage(',');
