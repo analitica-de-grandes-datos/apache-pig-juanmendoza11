@@ -17,4 +17,4 @@ datos = LOAD 'data.tsv' AS (letter:chararray, date:chararray, amount:int);
 agrupar = GROUP A BY letter;
 conteo = FOREACH B GENERATE group, COUNT(A);
 
-STORE C INTO 'output/' using PigStorage(',');
+STORE conteo INTO 'output/' using PigStorage(',');
