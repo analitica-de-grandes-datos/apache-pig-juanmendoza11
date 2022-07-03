@@ -29,6 +29,6 @@ datos = LOAD 'data.csv' USING PigStorage(',')
         id2:int           
         ); 
 
-fetch_1 = FOREACH A GENERATE SUBSTRING(fecha, 5, 7);
+fetch_1 = FOREACH datos GENERATE SUBSTRING(fecha, 5, 7);
 STORE fetch_1 INTO 'output/' using PigStorage(',');
 
